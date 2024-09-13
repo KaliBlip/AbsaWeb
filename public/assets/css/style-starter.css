@@ -3059,18 +3059,18 @@ textarea.form-control.is-invalid {
 
 .form-select.is-invalid:focus,
 .was-validated .form-select:invalid:focus {
-    border-color: #dc3545;
+    border-color: #dc2137;
     box-shadow: 0 0 0 .25rem rgba(220, 53, 69, .25)
 }
 
 .form-check-input.is-invalid,
 .was-validated .form-check-input:invalid {
-    border-color: #dc3545
+    border-color: #dc2137
 }
 
 .form-check-input.is-invalid:checked,
 .was-validated .form-check-input:invalid:checked {
-    background-color: #dc3545
+    background-color: #dc2137
 }
 
 .form-check-input.is-invalid:focus,
@@ -3080,7 +3080,7 @@ textarea.form-control.is-invalid {
 
 .form-check-input.is-invalid ~ .form-check-label,
 .was-validated .form-check-input:invalid ~ .form-check-label {
-    color: #dc3545
+    color: #dc2137
 }
 
 .form-check-inline .form-check-input ~ .invalid-feedback {
@@ -3204,31 +3204,31 @@ fieldset:disabled .btn {
 
 .btn-secondary:hover {
     color: #fff;
-    background-color: #f7553e;
-    border-color: #f7553e;
+    background-color: #dc2137;
+    border-color: #dc2137;
 }
 
 .btn-secondary:focus,
 .btn-secondary.focus {
     color: #fff;
-    background-color: #f7553e;
-    border-color: #f7553e;
+    background-color: #dc2137;
+    border-color: #dc2137;
     box-shadow: 0 0 0 0.2rem rgb(251 114 22 / 40%);
 }
 
 .btn-secondary.disabled,
 .btn-secondary:disabled {
     color: #fff;
-    background-color: #f7553e;
-    border-color: #f7553e;
+    background-color: #dc2137;
+    border-color: #dc2137;
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active,
 .btn-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-secondary.dropdown-toggle {
     color: #fff;
-    background-color: #f7553e;
-    border-color: #f7553e;
+    background-color: #dc2137;
+    border-color: #dc2137;
 
 }
 
