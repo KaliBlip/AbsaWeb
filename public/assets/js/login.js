@@ -1,6 +1,13 @@
 // Import Firebase modules
 import { auth } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { onAuthStateChanged } from 'firebase/auth';
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = 'dashboard.html'; // Redirect to dashboard if already logged in
+  }
+});
 
 // Get references to form elements
 const form = document.querySelector('form');
@@ -28,7 +35,7 @@ form.addEventListener('submit', async function(e) {
     const user = userCredential.user;
 
     // Notify the user of successful login
-    alert('Login successful!');
+    // alert('Login successful!');
     // Redirect to dashboard or home page
     window.location.href = 'dashboard.html';
   } catch (error) {
