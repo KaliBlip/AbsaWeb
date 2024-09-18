@@ -33,6 +33,8 @@
 
   <script type="module" src="assets/js/dashboard.js"></script>
   <script type="module" src="assets/js/firebase.js"></script>
+  <script type="module" src="assets/js/addRandomTransactions.js"></script>
+
 
 
   <!-- Firebase CDN Scripts -->
@@ -298,7 +300,10 @@
                   <h5 class="card-title fw-bold col-9">Recent Transactions <br><span>All your recent transaactions in
                       one
                       place</span></h5>
+
                   <hr />
+                  <button onclick="addRandomTransactions()">Add Random Transactions</button>
+
                   <table class="table table-borderless ri-table-line table-hover">
                     <thead class="text fw-light">
                       <tr class="fw-light text-primary-emphasis">
