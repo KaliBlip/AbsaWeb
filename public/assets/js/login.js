@@ -1,26 +1,30 @@
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-import { auth } from './firebase.js';  // Import the initialized auth from your firebase.js
+// Import the necessary Firebase modules
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { firebaseConfig } from './firebase.js'; // Adjust the import based on your export method
 
-// Handle form submission
-document.querySelector('form').addEventListener('submit', async (e) => {
-  e.preventDefault();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  // Get form values
-  const email = document.getElementById('yourUsername').value;
-  const password = document.getElementById('yourPassword').value;
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.querySelector('form'); // Select the form element
 
-  try {
-    // Sign in the user with Firebase Authentication
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+  loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent the default form submission
 
-    // Redirect to the dashboard or another page upon successful login
-    alert('Login successful!');
-    window.location.href = 'dashboard.html'; // Update with your dashboard page
+    const email = loginForm.querySelector('input[name="username"]').value;
+    const password = loginForm.querySelector('input[name="password"]').value;
 
-  } catch (error) {
-    // Handle errors
-    console.error('Error during login: ', error);
-    alert('Failed to login: ' + error.message);
-  }
+    try {
+      // Sign in with Firebase Authentication
+      await signInWithEmailAndPassword(auth, email, password);
+      // Redirect to the dashboard on successful login
+      window.location.href = 'dashboard.html';
+    } catch (error) {
+      // Handle errors here
+      console.error('Error signing in:', error.message);
+      alert('Login failed. Please check your email and password.');
+    }
+  });
 });
