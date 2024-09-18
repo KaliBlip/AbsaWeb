@@ -53,5 +53,5 @@ async function addRandomTransactions() {
     }
 }
 
-// Run function to add random transactions
-addRandomTransactions();
+// Expose function to global scope
+window.addRandomTransactions = addRandomTransactions;
