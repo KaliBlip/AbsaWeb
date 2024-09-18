@@ -1,5 +1,5 @@
 // Import the necessary Firebase modules
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase.js';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from './firebase.js'; // Adjust the import based on your export method
 
