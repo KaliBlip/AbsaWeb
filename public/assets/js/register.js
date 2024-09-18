@@ -2,8 +2,7 @@
 import { getFirestore, doc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
-// Import Firebase auth and db from firebase.js
-import { auth, db } from './firebase.js';
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
