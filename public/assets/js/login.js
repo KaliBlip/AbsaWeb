@@ -1,7 +1,12 @@
-// Import the necessary Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
-import { firebaseConfig } from './firebase.js'; // Adjust the import based on your export method
+// // Import the necessary Firebase modules
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+// import { getAuth, signInWithEmailAndPassword } from "firebase.js";
+// import { firebaseConfig } from './firebase.js'; // Adjust the import based on your export method
+
+// Import Firebase auth and db from firebase.js
+import { auth } from './firebase.js';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -1,6 +1,11 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, collection, addDoc } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase.js';
+import { getFirestore, doc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+// Import Firebase auth and db from firebase.js
+import { auth, db } from './firebase.js';
+
+
 
 // Initialize Firebase
 const firebaseConfig = {
