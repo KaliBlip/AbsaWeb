@@ -1,7 +1,6 @@
-// Import Firebase auth and db from firebase.js
-import { auth } from './firebase.js'; // Using the exported auth from firebase.js
+// Import Firebase auth from firebase.js
+import { auth } from './firebase.js'; 
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.querySelector('form'); // Select the form element
@@ -15,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       // Sign in with Firebase Authentication
       await signInWithEmailAndPassword(auth, email, password);
+      
       // Redirect to the dashboard on successful login
       window.location.href = 'dashboard.html';
     } catch (error) {

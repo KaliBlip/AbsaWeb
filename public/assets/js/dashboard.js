@@ -1,31 +1,24 @@
-import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
- // Assuming firebase.js exports your Firestore instance
-// dashboard.js
-import { auth, db } from './firebase.js';
-
-// Use auth and db as needed
-
-// Initialize Firebase Auth and Firestore
-const auth = getAuth();
-const firestore = getFirestore(db);
+// Import necessary Firebase modules from firebase.js
+import { auth, db } from './firebase.js'; 
+import { doc, getDoc, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
 // Function to load user data
 function loadUserData(user) {
   // Get the user's Firestore document based on UID
-  const userDocRef = doc(firestore, "users", user.uid);
-  
+  const userDocRef = doc(db, "users", user.uid);
+
   getDoc(userDocRef).then((docSnapshot) => {
     if (docSnapshot.exists()) {
       const userData = docSnapshot.data();
-      
+
       // Update account number and balances on the dashboard
       document.getElementById("account-number-sidebar").textContent = userData.accountNumber;
       document.getElementById("account-number-dropdown").textContent = userData.accountNumber;
       document.getElementById("checking-balance").textContent = userData.checkingBalance;
       document.getElementById("savings-balance").textContent = userData.savingsBalance;
       document.getElementById("total-balance").textContent = (userData.checkingBalance + userData.savingsBalance).toFixed(2);
-      
+
       // Load recent transactions
       loadTransactions(user.uid);
     } else {
@@ -38,7 +31,7 @@ function loadUserData(user) {
 
 // Function to load transactions from the user's transactions subcollection
 function loadTransactions(userId) {
-  const transactionsRef = collection(firestore, "users", userId, "transactions");
+  const transactionsRef = collection(db, "users", userId, "transactions");
   const transactionsQuery = query(transactionsRef);  // Adjust the query if needed
 
   getDocs(transactionsQuery).then((querySnapshot) => {
@@ -53,7 +46,7 @@ function loadTransactions(userId) {
           <td class="text-secondary-emphasis fw-bold">${transaction.account}</td>
           <td>${transaction.description}</td>
           <td>${transaction.category}</td>
-          <td>$${transaction.amount.toFixed(2)}</td>
+          <td>$${parseFloat(transaction.amount).toFixed(2)}</td>
           <td><span class="badge ${transaction.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${transaction.status}</span></td>
         </tr>
       `;
