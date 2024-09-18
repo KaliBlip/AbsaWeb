@@ -1,45 +1,26 @@
-// Import Firebase modules
-import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-import { onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { auth } from './firebase.js';  // Import the initialized auth from your firebase.js
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    window.location.href = 'dashboard.html'; // Redirect to dashboard if already logged in
-  }
-});
+// Handle form submission
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-// Get references to form elements
-const form = document.querySelector('form');
-const usernameInput = document.getElementById('yourUsername');
-const passwordInput = document.getElementById('yourPassword');
-
-// Add event listener for form submission
-form.addEventListener('submit', async function(e) {
-  e.preventDefault(); // Prevent the default form submission
-
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value;
-
-  // Simple form validation
-  if (!username || !password) {
-    alert('Please enter your username and password.');
-    return;
-  }
+  // Get form values
+  const email = document.getElementById('yourUsername').value;
+  const password = document.getElementById('yourPassword').value;
 
   try {
-    // Sign in with email and password
-    // You need to adjust your authentication method if using custom username
-    // or fetch user email from Firestore if required
-    const userCredential = await signInWithEmailAndPassword(auth, username, password);
+    // Sign in the user with Firebase Authentication
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Notify the user of successful login
-    // alert('Login successful!');
-    // Redirect to dashboard or home page
-    window.location.href = 'dashboard.html';
+    // Redirect to the dashboard or another page upon successful login
+    alert('Login successful!');
+    window.location.href = 'dashboard.html'; // Update with your dashboard page
+
   } catch (error) {
-    console.error('Error:', error);
-    alert('Login failed: ' + error.message);
+    // Handle errors
+    console.error('Error during login: ', error);
+    alert('Failed to login: ' + error.message);
   }
 });
