@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+// import { getAuth } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+// import { getFirestore } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -14,7 +14,12 @@ const firebaseConfig = {
   measurementId: "G-14JPDKMLP5"
 };
 
+// Get references to Firestore and Auth
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+// export const auth = getAuth(app);
+// export const db = getFirestore(app);
