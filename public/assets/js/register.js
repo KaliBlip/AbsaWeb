@@ -22,7 +22,7 @@ document.querySelector('form').addEventListener('submit', async (e) => {
       name: name,
       email: email,
       username: username,
-      accountnumber: accountnumber,
+      accountnumber: accountNumber,
       checkingBalance: 0,  // Default balance
       savingsBalance: 0,   // Default balance
       user_image: ''       // Placeholder for now (you can later add profile image upload functionality)
