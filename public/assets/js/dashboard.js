@@ -30,6 +30,8 @@ async function fetchUserData() {
         document.getElementById('total-balance').textContent = `$${(userData.checkingBalance + userData.savingsBalance).toFixed(2)}`;
         document.getElementById('checking-balance').textContent = `$${userData.checkingBalance.toFixed(2)}`;
         document.getElementById('savings-balance').textContent = `$${userData.savingsBalance.toFixed(2)}`;
+
+        console.log(userData);
     } else {
         console.log("No such document!");
     }
