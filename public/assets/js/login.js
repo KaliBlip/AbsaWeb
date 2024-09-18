@@ -1,6 +1,6 @@
 // Import the necessary Firebase modules
-import { initializeApp } from 'firebase.js';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 import { firebaseConfig } from './firebase.js'; // Adjust the import based on your export method
 
 // Initialize Firebase
