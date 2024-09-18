@@ -24,6 +24,8 @@ async function fetchUserData() {
         
         // Update HTML with user data
         document.getElementById('account-number-sidebar').textContent = userData.accountNumber;
+        document.getElementById('yourUsername').textContent = userData.name;
+
         document.getElementById('account-number-dropdown').textContent = userData.accountNumber;
         document.getElementById('total-balance').textContent = `$${(userData.checkingBalance + userData.savingsBalance).toFixed(2)}`;
         document.getElementById('checking-balance').textContent = `$${userData.checkingBalance.toFixed(2)}`;
