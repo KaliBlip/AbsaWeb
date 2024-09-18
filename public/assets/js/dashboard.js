@@ -23,7 +23,7 @@ async function fetchUserData() {
         const userData = userDoc.data();
         
         // Update HTML with user data
-        document.getElementById('account-number-sidebar').textContent = userData.accountNumber;
+        document.getElementById('account-number-sidebar').textContent = userData.accountnumber;
         document.getElementById('yourUsername').textContent = userData.name;
 
         document.getElementById('account-number-dropdown').textContent = userData.accountNumber;
