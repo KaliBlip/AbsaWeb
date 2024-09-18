@@ -1,3 +1,8 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+
+
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyD_YzLE3_fBF4k0Vjw_9sMiN6Ji0f8uzZQ",
@@ -9,9 +14,11 @@ const firebaseConfig = {
   measurementId: "G-14JPDKMLP5"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
-// Firestore and Auth references
-const db = firebase.firestore();
-const auth = firebase.auth();
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { auth, db };

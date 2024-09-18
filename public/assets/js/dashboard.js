@@ -1,6 +1,10 @@
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js";
-import { db } from './firebase.js';  // Assuming firebase.js exports your Firestore instance
+ // Assuming firebase.js exports your Firestore instance
+// dashboard.js
+import { auth, db } from './firebase.js';
+
+// Use auth and db as needed
 
 // Initialize Firebase Auth and Firestore
 const auth = getAuth();
