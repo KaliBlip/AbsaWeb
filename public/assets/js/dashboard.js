@@ -14,6 +14,10 @@ function loadUserData(user) {
 
       // Update account number and balances on the dashboard
       document.getElementById("account-number-sidebar").textContent = userData.accountNumber;
+      document.getElementById("yourName").textContent = userData.name;
+      document.getElementById("yourName").textContent = userData.name;
+
+
       document.getElementById("account-number-dropdown").textContent = userData.accountNumber;
       document.getElementById("checking-balance").textContent = userData.checkingBalance;
       document.getElementById("savings-balance").textContent = userData.savingsBalance;
@@ -60,7 +64,9 @@ function loadTransactions(userId) {
 // Listen for Firebase Auth state changes to get the logged-in user
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    document.getElementById("yourUsername").textContent = user.email;
+    document.getElementById("yourEmail").textContent = user.email;
+    document.getElementById("yourUsername").textContent = user.name;
+
     loadUserData(user);
   } else {
     // Redirect to login if no user is signed in
