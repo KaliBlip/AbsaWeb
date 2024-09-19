@@ -183,103 +183,57 @@
             </div>
           </div>
 
-          <!-- Budget Report -->
-          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-            <div class="px-4 py-5 sm:px-6">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Budget Report
-              </h3>
-            </div>
-            <div class="border-t border-gray-200 p-4">
-              <canvas id="budgetChart" width="400" height="200"></canvas>
-            </div>
-          </div>
+          
         </div>
       </main>
     </div>
   </div>
 
   <script>
-    // Budget Chart
-    const ctx = document.getElementById('budgetChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: ['Sales', 'Administration', 'Information Technology', 'Customer Support', 'Development', 'Marketing'],
-        datasets: [{
-          label: 'Allocated Budget',
-          data: [4200, 3000, 20000, 35000, 50000, 18000],
-          fill: true,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 99, 132)'
-        }, {
-          label: 'Actual Spending',
-          data: [5000, 14000, 28000, 26000, 42000, 21000],
-          fill: true,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgb(54, 162, 235)',
-          pointBackgroundColor: 'rgb(54, 162, 235)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(54, 162, 235)'
-        }]
-      },
-      options: {
-        elements: {
-          line: {
-            borderWidth: 3
-          }
-        }
-      }
-    });
+    
+    // // Populate account number and balances
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   const accountNumberHeader = document.getElementById('account-number-header');
+    //   const totalBalance = document.getElementById('total-balance');
+    //   const checkingBalance = document.getElementById('checking-balance');
+    //   const savingsBalance = document.getElementById('savings-balance');
+    //   const transactionsTableBody = document.getElementById('transactions-table-body');
 
-    // Populate account number and balances
-    document.addEventListener('DOMContentLoaded', () => {
-      const accountNumberHeader = document.getElementById('account-number-header');
-      const totalBalance = document.getElementById('total-balance');
-      const checkingBalance = document.getElementById('checking-balance');
-      const savingsBalance = document.getElementById('savings-balance');
-      const transactionsTableBody = document.getElementById('transactions-table-body');
+    //   // Simulated data (replace with actual data fetching logic)
+    //   const accountData = {
+    //     accountNumber: '1234567890',
+    //     totalBalance: 10000,
+    //     checkingBalance: 5000,
+    //     savingsBalance: 5000,
+    //     transactions: [
+    //       { date: '2023-09-19', account: 'Checking', description: 'Grocery Shopping', category: 'Food', amount: -150, status: 'Completed' },
+    //       { date: '2023-09-18', account: 'Savings', description: 'Salary Deposit', category: 'Income', amount: 3000, status: 'Completed' },
+    //       { date: '2023-09-17', account: 'Checking', description: 'Online Purchase', category: 'Shopping', amount: -75.50, status: 'Pending' }
+    //     ]
+    //   };
 
-      // Simulated data (replace with actual data fetching logic)
-      const accountData = {
-        accountNumber: '1234567890',
-        totalBalance: 10000,
-        checkingBalance: 5000,
-        savingsBalance: 5000,
-        transactions: [
-          { date: '2023-09-19', account: 'Checking', description: 'Grocery Shopping', category: 'Food', amount: -150, status: 'Completed' },
-          { date: '2023-09-18', account: 'Savings', description: 'Salary Deposit', category: 'Income', amount: 3000, status: 'Completed' },
-          { date: '2023-09-17', account: 'Checking', description: 'Online Purchase', category: 'Shopping', amount: -75.50, status: 'Pending' }
-        ]
-      };
+    //   accountNumberHeader.textContent = accountData.accountNumber;
+    //   totalBalance.textContent = `$${accountData.totalBalance.toFixed(2)}`;
+    //   checkingBalance.textContent = `$${accountData.checkingBalance.toFixed(2)}`;
+    //   savingsBalance.textContent = `$${accountData.savingsBalance.toFixed(2)}`;
 
-      accountNumberHeader.textContent = accountData.accountNumber;
-      totalBalance.textContent = `$${accountData.totalBalance.toFixed(2)}`;
-      checkingBalance.textContent = `$${accountData.checkingBalance.toFixed(2)}`;
-      savingsBalance.textContent = `$${accountData.savingsBalance.toFixed(2)}`;
-
-      accountData.transactions.forEach(transaction => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.date}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${transaction.account}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.description}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.category}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.amount < 0 ? '-' : ''}$${Math.abs(transaction.amount).toFixed(2)}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${transaction.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
-              ${transaction.status}
-            </span>
-          </td>
-        `;
-        transactionsTableBody.appendChild(row);
-      });
-    });
+    //   accountData.transactions.forEach(transaction => {
+    //     const row = document.createElement('tr');
+    //     row.innerHTML = `
+    //       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.date}</td>
+    //       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${transaction.account}</td>
+    //       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.description}</td>
+    //       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.category}</td>
+    //       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.amount < 0 ? '-' : ''}$${Math.abs(transaction.amount).toFixed(2)}</td>
+    //       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    //         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${transaction.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+    //           ${transaction.status}
+    //         </span>
+    //       </td>
+    //     `;
+    //     transactionsTableBody.appendChild(row);
+    //   });
+    // });
   </script>
 
   <footer class="bg-white shadow mt-8">
