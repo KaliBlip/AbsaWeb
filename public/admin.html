@@ -133,6 +133,23 @@
       <button type="submit">Search User</button>
     </form>
 
+    <!-- Section to update account details -->
+    <div id="accountDetailsSection" style="display: none; margin-top: 20px;">
+      <h3>Account Details</h3>
+      <form id="accountDetailsForm">
+        <label for="accountNumber">Account Number</label>
+        <input type="text" id="accountNumber" required>
+
+        <label for="checkingBalance">Checking Balance</label>
+        <input type="number" id="checkingBalance" required>
+
+        <label for="savingsBalance">Savings Balance</label>
+        <input type="number" id="savingsBalance" required>
+
+        <button type="submit">Update Account Details</button>
+      </form>
+    </div>
+
     <!-- Display transactions for a specific user -->
     <h3 class="mt-5">Transactions</h3>
     <table class="table">
@@ -204,9 +221,8 @@
   </div>
 
   <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js"></script>
-<script type="module" src="assets/js/admin.js"></script>
-
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js"></script>
+  <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
