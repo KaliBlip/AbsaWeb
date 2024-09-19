@@ -1,4 +1,4 @@
-import { getFirestore, doc, getDoc, collection, query, where, getDocs, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 import { auth, db } from './firebase.js';
 
@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchUserForm = document.getElementById('searchUserForm');
   const transactionsTableBody = document.getElementById('transactionsTableBody');
   const transactionForm = document.getElementById('transactionForm');
+  const balanceForm = document.getElementById('balanceForm');
 
   let currentUserId;
 
@@ -23,6 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
           currentUserId = doc.id;
+          const userData = doc.data();
+
+          // Populate balance form with user data
+          document.getElementById('accountNumber').value = userData.accountNumber;
+          document.getElementById('checkingBalance').value = userData.checkingBalance;
+          document.getElementById('savingsBalance').value = userData.savingsBalance;
+
           loadTransactions(currentUserId);
         });
       } else {
@@ -83,6 +91,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('edit-btn')) {
       const transactionId = e.target.getAttribute('data-id');
       // Logic to populate modal form for editing (left as an exercise)
+    }
+  });
+
+  // Update user balances
+  balanceForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const updatedAccountNumber = document.getElementById('accountNumber').value;
+    const updatedCheckingBalance = parseFloat(document.getElementById('checkingBalance').value);
+    const updatedSavingsBalance = parseFloat(document.getElementById('savingsBalance').value);
+
+    if (currentUserId) {
+      const userRef = doc(db, 'users', currentUserId);
+
+      try {
+        await updateDoc(userRef, {
+          accountNumber: updatedAccountNumber,
+          checkingBalance: updatedCheckingBalance,
+          savingsBalance: updatedSavingsBalance
+        });
+        alert('User balance updated successfully!');
+      } catch (error) {
+        console.error("Error updating user balance:", error);
+      }
     }
   });
 });
