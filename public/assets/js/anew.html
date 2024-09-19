@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Absa Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            absa: {
+              red: '#FF0000',
+              gray: '#F3F4F6',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <script type="module" src="assets/js/dashboard.js"></script>
+  <script type="module" src="assets/js/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="bg-white w-64 hidden sm:block shadow-xl">
+      <div class="p-6">
+        <img src="assets/images/absa-logo.png" alt="Absa Logo" class="h-8 mb-4">
+        <nav>
+          <a href="dashboard.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-absa-gray text-absa-red">
+            Dashboard
+          </a>
+          <a href="users-profile.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-absa-gray">
+            Profile
+          </a>
+          <a href="pages-transactions.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-absa-gray">
+            Transactions
+          </a>
+          <a href="pages-contact.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-absa-gray">
+            Contact
+          </a>
+          <a href="pages-accounts.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-absa-gray">
+            My Accounts
+          </a>
+          <a href="pages-transfer.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-absa-gray">
+            Transfer Funds
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header -->
+      <header class="bg-white shadow-sm z-10">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+          <div class="flex items-center">
+            <p class="mr-4">
+              <span class="text-sm text-gray-500">Account number:</span>
+              <span class="text-sm font-medium text-gray-900" id="account-number-header"></span>
+            </p>
+            <img src="assets/images/profile-img.jpg" alt="Profile" class="h-8 w-8 rounded-full">
+          </div>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <!-- Balance Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-absa-red rounded-md p-3">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Total Balance
+                      </dt>
+                      <dd class="text-lg font-semibold text-gray-900" id="total-balance">
+                        $0.00
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Checking
+                      </dt>
+                      <dd class="text-lg font-semibold text-gray-900" id="checking-balance">
+                        $0.00
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div class="ml-5 w-0 flex-1">
+                    <dl>
+                      <dt class="text-sm font-medium text-gray-500 truncate">
+                        Savings
+                      </dt>
+                      <dd class="text-lg font-semibold text-gray-900" id="savings-balance">
+                        $0.00
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Transactions -->
+          <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
+            <div class="px-4 py-5 sm:px-6">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Recent Transactions
+              </h3>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                All your recent transactions in one place
+              </p>
+            </div>
+            <div class="border-t border-gray-200">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Date
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Account
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Description
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Category
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Amount
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" id="transactions-table-body">
+                  <!-- Transactions will be dynamically added here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    
+    // // Populate account number and balances
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   const accountNumberHeader = document.getElementById('account-number-header');
+    //   const totalBalance = document.getElementById('total-balance');
+    //   const checkingBalance = document.getElementById('checking-balance');
+    //   const savingsBalance = document.getElementById('savings-balance');
+    //   const transactionsTableBody = document.getElementById('transactions-table-body');
+
+    //   // Simulated data (replace with actual data fetching logic)
+    //   const accountData = {
+    //     accountNumber: '1234567890',
+    //     totalBalance: 10000,
+    //     checkingBalance: 5000,
+    //     savingsBalance: 5000,
+    //     transactions: [
+    //       { date: '2023-09-19', account: 'Checking', description: 'Grocery Shopping', category: 'Food', amount: -150, status: 'Completed' },
+    //       { date: '2023-09-18', account: 'Savings', description: 'Salary Deposit', category: 'Income', amount: 3000, status: 'Completed' },
+    //       { date: '2023-09-17', account: 'Checking', description: 'Online Purchase', category: 'Shopping', amount: -75.50, status: 'Pending' }
+    //     ]
+    //   };
+
+    //   accountNumberHeader.textContent = accountData.accountNumber;
+    //   totalBalance.textContent = `$${accountData.totalBalance.toFixed(2)}`;
+    //   checkingBalance.textContent = `$${accountData.checkingBalance.toFixed(2)}`;
+    //   savingsBalance.textContent = `$${accountData.savingsBalance.toFixed(2)}`;
+
+      accountData.transactions.forEach(transaction => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.date}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${transaction.account}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.description}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.category}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.amount < 0 ? '-' : ''}$${Math.abs(transaction.amount).toFixed(2)}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${transaction.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+              ${transaction.status}
+            </span>
+          </td>
+        `;
+        transactionsTableBody.appendChild(row);
+      });
+    });
+  </script>
+
+  <footer class="bg-white shadow mt-8">
+    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm text-gray-500">
+        &copy; 2023 Absa Capital. All rights reserved.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

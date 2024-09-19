@@ -1,5 +1,5 @@
 // Import necessary Firebase modules from firebase.js
-import { auth, db } from './firebase.js'; 
+import { auth, db } from './firebase.js';
 import { doc, getDoc, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
@@ -46,12 +46,15 @@ function loadTransactions(userId) {
       const transaction = doc.data();
       const row = `
         <tr>
-          <td>${new Date(transaction.date.seconds * 1000).toLocaleDateString()}</td>
-          <td class="text-secondary-emphasis fw-bold">${transaction.account}</td>
-          <td>${transaction.description}</td>
-          <td>${transaction.category}</td>
-          <td>$${parseFloat(transaction.amount).toFixed(2)}</td>
-          <td><span class="badge ${transaction.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${transaction.status}</span></td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(transaction.date.seconds * 1000).toLocaleDateString()}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${transaction.account}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.description}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${transaction.category}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$${parseFloat(transaction.amount).toFixed(2)}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${transaction.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${transaction.status}
+          </span><
+          /td>
         </tr>
       `;
       transactionsTableBody.innerHTML += row;
