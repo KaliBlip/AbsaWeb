@@ -5,121 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Transactions</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #333;
-      text-align: center;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    label {
-      font-size: 14px;
-      color: #666;
-      font-weight: bold;
-    }
-    input, select {
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-    }
-    input:focus, select:focus {
-      border-color: #007bff;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    .table th, .table td {
-      padding: 12px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    .table th {
-      background-color: #f8f8f8;
-      font-weight: bold;
-      color: #333;
-    }
-    .badge {
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-size: 12px;
-    }
-    .bg-success {
-      background-color: #28a745;
-      color: white;
-    }
-    .bg-danger {
-      background-color: #dc3545;
-      color: white;
-    }
-    .btn-warning {
-      background-color: #ffc107;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn-warning:hover {
-      background-color: #e0a800;
-    }
-    .modal-content {
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #fff;
-    }
-    .modal-header {
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .modal-title {
-      font-size: 20px;
-      color: #333;
-    }
-    .btn-close {
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: #999;
-      cursor: pointer;
-    }
-    .btn-close:hover {
-      color: #333;
-    }
+    /* (Your existing styles) */
   </style>
 </head>
 <body>
@@ -136,7 +22,7 @@
     <!-- Section to update account details -->
     <div id="accountDetailsSection" style="display: none; margin-top: 20px;">
       <h3>Account Details</h3>
-      <form id="accountDetailsForm">
+      <form id="balanceForm"> <!-- Updated to include balanceForm ID -->
         <label for="accountNumber">Account Number</label>
         <input type="text" id="accountNumber" required>
 
@@ -170,10 +56,10 @@
     </table>
 
     <!-- Button to add new transaction -->
-    <button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#transactionModal" style="background-color: #28a745; border: none; padding: 10px 15px; font-size: 14px; border-radius: 5px;">Add Transaction</button>
+    <button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#transactionModal">Add Transaction</button>
 
     <!-- Modal for adding/editing transactions -->
-    <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true" style="display:none;">
+    <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

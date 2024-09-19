@@ -6,20 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchUserForm = document.getElementById('searchUserForm');
   const transactionsTableBody = document.getElementById('transactionsTableBody');
   const transactionForm = document.getElementById('transactionForm');
-  const balanceForm = document.getElementById('balanceForm');
+  const balanceForm = document.getElementById('balanceForm'); // Ensure balanceForm is defined
 
   let currentUserId;
 
-  // Ensure all DOM elements are present before adding event listeners
   if (searchUserForm) {
     searchUserForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const emailOrUid = document.getElementById('searchEmail').value;
       
       try {
-        // Query Firestore to find user by email or UID
         const usersRef = collection(db, 'users');
-        const q = query(usersRef, where('email', '==', emailOrUid)); // Search by email
+        const q = query(usersRef, where('email', '==', emailOrUid)); 
         const querySnapshot = await getDocs(q);
         
         if (!querySnapshot.empty) {
@@ -27,15 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
             currentUserId = doc.id;
             const userData = doc.data();
 
-            // Populate balance form with user data
             document.getElementById('accountNumber').value = userData.accountNumber;
             document.getElementById('checkingBalance').value = userData.checkingBalance;
             document.getElementById('savingsBalance').value = userData.savingsBalance;
 
             loadTransactions(currentUserId);
+            document.getElementById('accountDetailsSection').style.display = 'block'; // Show account details section
           });
         } else {
           console.log('No user found');
+          alert('No user found with that email or UID.');
         }
       } catch (error) {
         console.error("Error finding user:", error);
@@ -43,15 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Load transactions for a user
   async function loadTransactions(userId) {
     const transactionsRef = collection(db, 'users', userId, 'transactions');
     const querySnapshot = await getDocs(transactionsRef);
-    transactionsTableBody.innerHTML = '';  // Clear the table
+    transactionsTableBody.innerHTML = ''; 
 
     querySnapshot.forEach((doc) => {
       const transaction = doc.data();
-      const amount = parseFloat(transaction.amount); // Ensure amount is a number
+      const amount = parseFloat(transaction.amount);
 
       const row = `
         <tr>
@@ -70,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Add or Edit transaction
   if (transactionForm) {
     transactionForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -80,36 +77,36 @@ document.addEventListener('DOMContentLoaded', () => {
         account: document.getElementById('accountType').value,
         description: document.getElementById('description').value,
         category: document.getElementById('category').value,
-        amount: parseFloat(document.getElementById('amount').value), // Ensure amount is a number
+        amount: parseFloat(document.getElementById('amount').value),
         status: document.getElementById('status').value
       };
 
       if (currentUserId) {
         const transactionsRef = collection(db, 'users', currentUserId, 'transactions');
         await addDoc(transactionsRef, transactionData);
-        loadTransactions(currentUserId); // Reload transactions after adding
+        alert('Transaction added successfully!');
+        loadTransactions(currentUserId);
       }
     });
   }
 
-  // Handle editing transaction (you would set up logic to load data into the form when clicking edit)
   if (transactionsTableBody) {
     transactionsTableBody.addEventListener('click', (e) => {
       if (e.target.classList.contains('edit-btn')) {
         const transactionId = e.target.getAttribute('data-id');
-        // Logic to populate modal form for editing (left as an exercise)
+        // Fetch transaction data and populate the modal form (to be implemented)
+        console.log('Editing transaction:', transactionId); // Placeholder for edit logic
       }
     });
   }
 
-  // Update user balances
   if (balanceForm) {
     balanceForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const updatedAccountNumber = document.getElementById('accountNumber').value;
-      const updatedCheckingBalance = parseFloat(document.getElementById('checkingBalance').value); // Ensure balance is a number
-      const updatedSavingsBalance = parseFloat(document.getElementById('savingsBalance').value); // Ensure balance is a number
+      const updatedCheckingBalance = parseFloat(document.getElementById('checkingBalance').value);
+      const updatedSavingsBalance = parseFloat(document.getElementById('savingsBalance').value);
 
       if (currentUserId) {
         const userRef = doc(db, 'users', currentUserId);
