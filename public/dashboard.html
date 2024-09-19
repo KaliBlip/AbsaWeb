@@ -33,7 +33,24 @@
 
   <script type="module" src="assets/js/dashboard.js"></script>
   <script type="module" src="assets/js/firebase.js"></script>
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            absa: {
+              red: '#FF0000',
+              gray: '#F3F4F6',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
 
 
   
