@@ -14,7 +14,7 @@ function loadUserData(user) {
 
       // Update account number and balances on the dashboard
       document.getElementById("account-number-sidebar").textContent = userData.accountNumber;
-      document.getElementById("yourUsername").textContent = userData.username;
+      document.getElementById("yourUsername").textContent = userData.name;
       // document.getElementById("yourName").textContent = userData.name;
 
 
@@ -65,7 +65,7 @@ function loadTransactions(userId) {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("yourEmail").textContent = user.email;
-    document.getElementById("yourUsername").textContent = user.username;
+    document.getElementById("yourUsername").textContent = user.name;
 
     loadUserData(user);
   } else {
