@@ -14,8 +14,8 @@ function loadUserData(user) {
 
       // Update account number and balances on the dashboard
       document.getElementById("account-number-sidebar").textContent = userData.accountNumber;
-      document.getElementById("yourEmail").textContent = userData.email;
-      document.getElementById("yourName").textContent = userData.name;
+      // document.getElementById("yourEmail").textContent = userData.email;
+      // document.getElementById("yourName").textContent = userData.name;
 
 
       document.getElementById("account-number-dropdown").textContent = userData.accountNumber;
