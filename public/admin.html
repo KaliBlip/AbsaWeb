@@ -4,49 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Transactions</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #343a40;
-    }
-    .form-label {
-      font-weight: bold;
-    }
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #004085;
-    }
-    .table th, .table td {
-      vertical-align: middle;
-    }
-    .badge {
-      font-size: 12px;
-      padding: 5px 10px;
-    }
-    .bg-success {
-      background-color: #28a745 !important;
-    }
-    .bg-danger {
-      background-color: #dc3545 !important;
-    }
+    /* (Your existing styles) */
   </style>
 </head>
 <body>
@@ -55,36 +14,31 @@
 
     <!-- Search form to get user by email or UID -->
     <form id="searchUserForm">
-      <div class="mb-3">
-        <label for="searchEmail" class="form-label">Search User by Email or UID</label>
-        <input type="text" class="form-control" id="searchEmail" placeholder="Enter user email or UID" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Search User</button>
+      <label for="searchEmail">Search User by Email or UID</label>
+      <input type="text" id="searchEmail" placeholder="Enter user email or UID" required>
+      <button type="submit">Search User</button>
     </form>
 
     <!-- Section to update account details -->
     <div id="accountDetailsSection" style="display: none; margin-top: 20px;">
-      <h3 class="mb-4">Account Details</h3>
-      <form id="balanceForm">
-        <div class="mb-3">
-          <label for="accountNumber" class="form-label">Account Number</label>
-          <input type="text" class="form-control" id="accountNumber" required>
-        </div>
-        <div class="mb-3">
-          <label for="checkingBalance" class="form-label">Checking Balance</label>
-          <input type="number" class="form-control" id="checkingBalance" required>
-        </div>
-        <div class="mb-3">
-          <label for="savingsBalance" class="form-label">Savings Balance</label>
-          <input type="number" class="form-control" id="savingsBalance" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Update Account Details</button>
+      <h3>Account Details</h3>
+      <form id="balanceForm"> <!-- Updated to include balanceForm ID -->
+        <label for="accountNumber">Account Number</label>
+        <input type="text" id="accountNumber" required>
+
+        <label for="checkingBalance">Checking Balance</label>
+        <input type="number" id="checkingBalance" required>
+
+        <label for="savingsBalance">Savings Balance</label>
+        <input type="number" id="savingsBalance" required>
+
+        <button type="submit">Update Account Details</button>
       </form>
     </div>
 
     <!-- Display transactions for a specific user -->
-    <h3 class="mt-5 mb-4">Transactions</h3>
-    <table class="table table-striped">
+    <h3 class="mt-5">Transactions</h3>
+    <table class="table">
       <thead>
         <tr>
           <th>Date</th>
@@ -110,36 +64,36 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="transactionModalLabel">Add/Edit Transaction</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
           </div>
           <div class="modal-body">
             <form id="transactionForm">
               <div class="mb-3">
-                <label for="transactionDate" class="form-label">Date</label>
-                <input type="date" class="form-control" id="transactionDate" required>
+                <label for="transactionDate">Date</label>
+                <input type="date" id="transactionDate" required>
               </div>
               <div class="mb-3">
-                <label for="accountType" class="form-label">Account Type</label>
-                <select class="form-select" id="accountType" required>
+                <label for="accountType">Account Type</label>
+                <select id="accountType" required>
                   <option value="checking">Checking</option>
                   <option value="savings">Savings</option>
                 </select>
               </div>
               <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" id="description" required>
+                <label for="description">Description</label>
+                <input type="text" id="description" required>
               </div>
               <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="category" required>
+                <label for="category">Category</label>
+                <input type="text" id="category" required>
               </div>
               <div class="mb-3">
-                <label for="amount" class="form-label">Amount</label>
-                <input type="number" class="form-control" id="amount" required>
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" required>
               </div>
               <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select" id="status" required>
+                <label for="status">Status</label>
+                <select id="status" required>
                   <option value="Completed">Completed</option>
                   <option value="Pending">Pending</option>
                 </select>
@@ -152,8 +106,9 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS Bundle (includes Popper) -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js"></script>
   <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
