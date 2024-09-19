@@ -31,107 +31,132 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <script type="module" src="assets/js/dashboard.js"></script>
+  <script type="module" src="assets/js/firebase.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            absa: {
+              red: '#FF0000',
+              gray: '#F3F4F6',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+
+  
+
+
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+ <!-- ======= Header ======= -->
+ <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="dashboard.html" class="logo d-flex align-items-center">
-        <img src="assets/images/absa-logo.png" alt="">
-        <span class="d-none d-lg-block">AbsaCapital</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="dashboard.html" class="logo d-flex align-items-center">
+      <img src="assets/images/absa-logo.png" alt="">
+      <span class="d-none d-lg-block">AbsaCapital</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+  <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
 
 
-        <li class="nav-item ">
-          <p></p>
-          <h6 class="fw-medium text-primary-emphasis"> Account number: <br>
-            <span class="fw-light text-secondary-emphasis">858967656757567</span>
-            </h3>
-        </li>
 
-        <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/images/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+      <li class="nav-item ">
+        <p></p>
+        <h6 class="fw-medium text-primary-emphasis"> Account number: <br>
+          <span class="fw-light text-secondary-emphasis" id="account-number-sidebar"></span>
+          </h3>
+      </li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+      <li class="nav-item dropdown pe-3">
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/images/profile-img.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2" id="yourName">           </span>
+        </a><!-- End Profile Iamge Icon -->
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6 id="yourEmail"></h6>
+            <span id="account-number-dropdown"></span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-person"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-gear"></i>
+              <span>Account Settings</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <i class="bi bi-question-circle"></i>
+              <span>Need Help?</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-      </ul>
-    </nav><!-- End Icons Navigation -->
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </a>
+          </li>
 
-  </header><!-- End Header -->
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
@@ -222,9 +247,8 @@
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><i class="bi bi-currency-dollar">5,699,433</i></h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span
-                        class="text-muted small pt-2 ps-1">increase</span>
+                      <h6><i class="bi bi-currency-dollar" id="total-balance"></i></h6>
+                     
 
                     </div>
                   </div>
@@ -247,7 +271,7 @@
                       <i class="bi bi-bank2"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><i class="bi-currency-dollar">5,335</i></h6>
+                      <h6><i class="bi-currency-dollar" id="checking-balance"></i></h6>
                       <span class="text-warning small pt-1 fw-bold">8%</span> <span
                         class="text-muted small pt-2 ps-1">increase</span>
 
@@ -269,7 +293,7 @@
                       <i class="bi bi-piggy-bank"></i>
                     </div>
                     <div class="ps-3">
-                      <h6><i class="bi-currency-dollar">70,089</i></h6>
+                      <h6><i class="bi-currency-dollar" id="savings-balance"></i></h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span
                         class="text-muted small pt-2 ps-1">decrease</span>
                     </div>
@@ -287,7 +311,10 @@
                   <h5 class="card-title fw-bold col-9">Recent Transactions <br><span>All your recent transaactions in
                       one
                       place</span></h5>
+
                   <hr />
+                 
+
                   <table class="table table-borderless ri-table-line table-hover">
                     <thead class="text fw-light">
                       <tr class="fw-light text-primary-emphasis">
@@ -301,169 +328,33 @@
 
                       </tr>
                     </thead>
-                    <tbody class="text fw-light">
-                      <tr>
-                        <!-- <th scope="row"><a href="#"><img src="assets/images/product-1.jpg" alt=""></a></th> -->
-                        <td class="fw-light">23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Johnson's Pharmacy</td>
-                        <td>Healthcare</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Monthly Bonus from ABC Inc</td>
-                        <td>Bonus</td>
-                        <td>$6,004</td>
-
-                        <td><span class="badge bg-success">Pending</span></td>
-
-                      </tr>
+                    <tbody class="text fw-light" id="transactions-table-body">
+                     
+                    
                       <tr>
                         <td>23-03-2024</td>
                         <td class="text-secondary-emphasis fw-bold">Savings</td>
                         <td>Gass Refill and PetrolFuel</td>
+                        <td>Transport</td>
+                        <td>$6,004</td>
+                        <td><span class="badge bg-success">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td>23-03-2022</td>
+                        <td class="text-secondary-emphasis fw-bold">Savings</td>
+                        <td>Gass Refill</td>
                         <td>Transportation</td>
                         <td>$6,004</td>
                         <td><span class="badge bg-danger">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Descirption here</td>
-                        <td>Medication</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-success">Pending</span></td>
-                      </tr>
-                      <tr>
+                      </tr> <tr></tr>
                         <td>23-03-2024</td>
                         <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Savings Interest Payment</td>
-                        <td>Interest</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-success">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Savings Interest Payment</td>
-                        <td>Interest</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Descirption here</td>
-                        <td>Medication</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-danger">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Monthly Bonus from ABC Inc</td>
-                        <td>Bonus</td>
-                        <td>$6,004</td>
-
-                        <td><span class="badge bg-success">Pending</span></td>
-
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Gass Refill and PetrolFuel</td>
+                        <td>Gass and PetrolFuel</td>
                         <td>Transportation</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-danger">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Descirption here</td>
-                        <td>Medication</td>
-                        <td>$6,004</td>
+                        <td>$64,004</td>
                         <td><span class="badge bg-success">Pending</span></td>
                       </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Savings Interest Payment</td>
-                        <td>Interest</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-success">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Savings Interest Payment</td>
-                        <td>Interest</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Descirption here</td>
-                        <td>Medication</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-danger">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Monthly Bonus from ABC Inc</td>
-                        <td>Bonus</td>
-                        <td>$6,004</td>
-
-                        <td><span class="badge bg-success">Pending</span></td>
-
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Gass Refill and PetrolFuel</td>
-                        <td>Transportation</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-danger">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Descirption here</td>
-                        <td>Medication</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-success">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Savings Interest Payment</td>
-                        <td>Interest</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-success">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-primary-emphasis fw-light">Checking</td>
-                        <td>Savings Interest Payment</td>
-                        <td>Interest</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-
-                      </tr>
-                      <tr>
-                        <td>23-03-2024</td>
-                        <td class="text-secondary-emphasis fw-bold">Savings</td>
-                        <td>Descirption here</td>
-                        <td>Medication</td>
-                        <td>$6,004</td>
-                        <td><span class="badge bg-danger">Pending</span></td>
-                      </tr>
+                     
                     </tbody>
                   </table>
 
@@ -498,40 +389,37 @@
                     radar: {
                       // shape: 'circle',
                       indicator: [{
-                        name: 'Sales',
-                        max: 6500
+                        name: 'Investment',
+                        max: 65000
                       },
                       {
-                        name: 'Administration',
+                        name: 'Savings',
                         max: 16000
                       },
                       {
-                        name: 'Information Technology',
+                        name: 'Social',
                         max: 30000
                       },
                       {
-                        name: 'Customer Support',
-                        max: 38000
+                        name: 'Entertainment',
+                        max: 3800
                       },
                       {
-                        name: 'Development',
-                        max: 52000
+                        name: 'Health',
+                        max: 5200
                       },
-                      {
-                        name: 'Marketing',
-                        max: 25000
-                      }
+                      
                       ]
                     },
                     series: [{
                       name: 'Budget vs spending',
                       type: 'radar',
                       data: [{
-                        value: [4200, 3000, 20000, 35000, 50000, 18000],
+                        value: [4200, 3000, 20000, 35000, 50000],
                         name: 'Allocated Budget'
                       },
                       {
-                        value: [5000, 14000, 28000, 26000, 42000, 21000],
+                        value: [5000, 14000, 28000, 26000, 42000 ],
                         name: 'Actual Spending'
                       }
                       ]

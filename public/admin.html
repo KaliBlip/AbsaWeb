@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Transactions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-semibold mb-8 text-gray-800">Admin Dashboard</h1>
+
+    <!-- Search form -->
+    <form id="searchUserForm" class="mb-8">
+      <label for="searchEmail" class="block text-sm font-medium text-gray-700 mb-2">Search User by Email or UID</label>
+      <div class="flex">
+        <input type="text" id="searchEmail" placeholder="Enter user email or UID" required class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:ring-indigo-500 focus:border-indigo-500">
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Search User</button>
+      </div>
+    </form>
+
+    <!-- Account Details Section -->
+    <div id="accountDetailsSection" class="hidden mb-8 bg-white p-6 rounded-lg shadow">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800">Account Details</h3>
+      <form id="balanceForm">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <label for="accountNumber" class="block text-sm font-medium text-gray-700 mb-1">Account Number</label>
+            <input type="text" id="accountNumber" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
+          <div>
+            <label for="checkingBalance" class="block text-sm font-medium text-gray-700 mb-1">Checking Balance</label>
+            <input type="number" id="checkingBalance" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
+          <div>
+            <label for="savingsBalance" class="block text-sm font-medium text-gray-700 mb-1">Savings Balance</label>
+            <input type="number" id="savingsBalance" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
+        </div>
+        <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update Account Details</button>
+      </form>
+    </div>
+
+    <!-- Transactions Section -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800">Transactions</h3>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsTableBody" class="bg-white divide-y divide-gray-200">
+            <!-- Transactions will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+      <button id="addTransactionBtn" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Add Transaction</button>
+    </div>
+
+    <!-- Modal for adding/editing transactions -->
+    <div id="transactionModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+          <h3 class="text-lg leading-6 font-medium text-gray-900" id="transactionModalLabel">Add/Edit Transaction</h3>
+          <form id="transactionForm" class="mt-2 text-left">
+            <div class="mb-4">
+              <label for="transactionDate" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+              <input type="date" id="transactionDate" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+              <label for="accountType" class="block text-sm font-medium text-gray-700 mb-1">Account Type</label>
+              <select id="accountType" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="checking">Checking</option>
+                <option value="savings">Savings</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <input type="text" id="description" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+              <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+              <input type="text" id="category" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+              <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+              <input type="number" id="amount" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+              <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select id="status" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+            <div class="flex justify-end space-x-2">
+              <button type="button" id="closeModal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Close</button>
+              <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save Transaction</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js"></script>
+  <script type="module" src="assets/js/admin.js"></script>
+  <script>
+    // Modal functionality
+    const modal = document.getElementById('transactionModal');
+    const addTransactionBtn = document.getElementById('addTransactionBtn');
+    const closeModal = document.getElementById('closeModal');
+
+    addTransactionBtn.onclick = function() {
+      modal.classList.remove('hidden');
+    }
+
+    closeModal.onclick = function() {
+      modal.classList.add('hidden');
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title> / Login - Absa Capital</title>
+  <title>Login - AbsaCapital</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -30,6 +30,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+<script type="module" src="assets/js/login.js"></script>
+<script type="module" src="assets/js/firebase.js"></script>
 
 
 </head>
@@ -63,12 +66,12 @@
                   <form class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Account Number</label>
+                      <label for="yourUsername" class="form-label">Email Address</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">#</span>
-                        <input type="text" name="username" class="form-control" placeholder="account number here"
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" name="username" class="form-control" placeholder="email here"
                           id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your account number.</div>
+                        <div class="invalid-feedback">Please enter your email .</div>
                       </div>
                     </div>
 
