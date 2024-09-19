@@ -65,7 +65,7 @@ function loadTransactions(userId) {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("yourEmail").textContent = user.email;
-    document.getElementById("yourUsername").textContent = user.name;
+    document.getElementById("yourUsername").textContent = user.username;
 
     loadUserData(user);
   } else {
