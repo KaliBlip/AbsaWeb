@@ -53,8 +53,7 @@ function loadTransactions(userId) {
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$${parseFloat(transaction.amount).toFixed(2)}</td>
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${transaction.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${transaction.status}
-          </span><
-          /td>
+          </span>
         </tr>
       `;
       transactionsTableBody.innerHTML += row;
